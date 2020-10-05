@@ -1,0 +1,22 @@
+AllCops:
+  TargetRubyVersion: 2.7.1
+  TargetRailsVersion: 6.0.3
+  Exclude:
+    - 'bin/bundle'
+    - 'bin/rails'
+    - 'bin/rake'
+    - 'bin/rspec'
+    - 'bin/setup'
+    - 'bin/spring'
+    - 'bin/update'
+    - 'bin/webpack'
+    - 'bin/webpack-dev-server'
+    - 'bin/yarn'
+    - 'config.ru'
+    - 'vendor/**/*'
+    - 'db/schema.rb'
+    - 'db/seeds.rb'
+    - 'db/migrate/*'
+    - 'node_modules/**/*'
+Documentation:
+  Enabled: false
