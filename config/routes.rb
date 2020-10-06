@@ -6,10 +6,13 @@ Rails.application.routes.draw do
 
   # Admin routes
   scope :admin, module: :admin do
+    resources :users
+    resources :feedbacks
   end
 
   # Employee route
   scope :employee, module: :employee do
+    resources :feedbacks
   end
 
   scope :error do
