@@ -2,7 +2,7 @@ import Vue from "vue";
 import Vuex, { StoreOptions } from "vuex";
 import { RootState } from "./types";
 
-import ApiClient from "../lib/ApiClient";
+import ApiClient from "../../lib/ApiClient";
 import axios from "./axios";
 
 Vue.use(Vuex);

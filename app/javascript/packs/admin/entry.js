@@ -14,7 +14,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 // TODO: Configure Vuex
 
 import VueRouter from 'vue-router';
-import routes from './admin/pages/routes';
+import routes from './pages/routes';
 
 Vue.use(VueRouter);
 const router = new VueRouter({
@@ -36,6 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const props = camelizeKeys(JSON.parse(el.getAttribute('data-props')), {
     deep: true
   });
+
+  console.log(props)
 
   store.commit("init", {
     clientVersion: props.clientVersion
