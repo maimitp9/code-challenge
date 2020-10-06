@@ -1,4 +1,8 @@
 import Vue from "vue";
+import { camelizeKeys } from "humps";
+
+// Init Vuex and store
+import store from './store';
 
 import App from './App';
 
@@ -29,6 +33,13 @@ router.beforeEach((to, _from, next) => {
 
 document.addEventListener('DOMContentLoaded', () => {
   const el = document.getElementById("app")
+  const props = camelizeKeys(JSON.parse(el.getAttribute('data-props')), {
+    deep: true
+  });
+
+  store.commit("init", {
+    clientVersion: props.clientVersion
+  })
   new Vue({
     el,
     router,
