@@ -6,11 +6,19 @@
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.3.0",
+    "axios": "^0.20.0",
+    "bootstrap": "^4.5.2",
+    "bootstrap-vue": "^2.17.3",
     "eslint": "^7.10.0",
     "eslint-plugin-vue": "^7.0.1",
+    "humps": "^2.0.1",
+    "ts-loader": "^8.0.4",
+    "typescript": "^4.0.3",
     "vue": "^2.6.12",
     "vue-loader": "^15.9.3",
-    "vue-template-compiler": "^2.6.12"
+    "vue-router": "^3.4.5",
+    "vue-template-compiler": "^2.6.12",
+    "vuex": "^3.5.1"
   },
   "version": "0.1.0",
   "devDependencies": {
