@@ -4,15 +4,19 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get 'home', to: 'spa#index'
 
-  # Admin routes
-  scope :admin, module: :admin do
-    resources :users
-    resources :feedbacks
-  end
+  namespace :api do
+    namespace :v1 do
+      # Admin routes
+      namespace :admin do
+        resources :users
+        resources :feedbacks
+      end
 
-  # Employee route
-  scope :employee, module: :employee do
-    resources :feedbacks
+      # Employee route
+      namespace :employee do
+        resources :feedbacks
+      end
+    end
   end
 
   scope :error do
