@@ -1,21 +1,17 @@
 module.exports = {
-  "env": {
-    "es6": true,
-    "node": true
+  root: true,
+  env: {
+    node: true
   },
-  "extends": [
-      "eslint:recommended",
-      "plugin:vue/recommended"
-  ],
-  "globals": {
-      "Atomics": "readonly",
-      "SharedArrayBuffer": "readonly"
-  },
-  "parserOptions": {
-      "ecmaVersion": 11
-  },
-  "plugins": [
-      "vue"
-  ],
-  "rules": {}
+  extends: [
+		"eslint:recommended",
+		"plugin:vue/recommended",
+		"@vue/prettier",
+		"@vue/typescript"
+	],
+	parserOptions: {
+		parser: '@typescript-eslint/parser'
+	},
+	plugins: ["vue"],
+	rules: {}
 };

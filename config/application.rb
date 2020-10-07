@@ -32,6 +32,8 @@ module CodeChallenge
     # the framework and any gems in your application.
     config.time_zone = 'Tokyo'
 
+    config.middleware.insert_after ActionDispatch::Cookies, ActionDispatch::Session::CookieStore, key: '_code_challenge'
+
     # Include only ApplicationHelper and a helper corresponding to controller.
     config.action_controller.include_all_helpers = false
 
