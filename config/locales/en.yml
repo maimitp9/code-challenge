@@ -30,4 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activemodel:
+    errors:
+      models:
+        admin/sessions/new_form:
+          authentication_failed: "Authentication failed, try with correct email or password"

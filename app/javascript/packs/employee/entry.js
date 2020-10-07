@@ -22,7 +22,7 @@ const router = new VueRouter({
   routes
 })
 
-const BASE_TITLE = 'Admin';
+const BASE_TITLE = 'Employee';
 
 router.beforeEach((to, _from, next) => {
   // TODO: check isAuthenticated

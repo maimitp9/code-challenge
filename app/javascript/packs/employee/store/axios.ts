@@ -4,7 +4,7 @@ import { camelizeKeys, decamelizeKeys } from "humps";
 
 const axios = Axios.create({
   timeout: 30000,
-  baseURL: "/admin/api",
+  baseURL: "/employee/api",
 });
 
 // When URL parameters(QueryString), Convert camelCase -> snake_case

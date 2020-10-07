@@ -24,11 +24,6 @@ class ApiErrors {
     return this.errors.map((e) => e.code)[0];
   }
 
-  getErrorNo(): string | undefined {
-    const error = this.errors[0];
-    return error && error.errorNo;
-  }
-
   getErrorMessage(): string {
     return this.getErrorMessages().join(", ");
   }

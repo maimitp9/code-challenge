@@ -26,30 +26,31 @@ class ApiClient {
     return axios;
   }
 
-  // START Attendance front API
-  // async getAttendance(
-  //   groupId: number,
-  //   kidId: number,
-  //   data: {
-  //     dateRangeStart: string;
-  //     dateRangeEnd: string;
-  //   }
-  // ): Promise<Array<Attendance>> {
-  //   try {
-  //     const response = await this.axios.get(
-  //       `groups/${groupId}/kids/${kidId}/attendances`,
-  //       {
-  //         params: {
-  //           dateRangeStart: data.dateRangeStart,
-  //           dateRangeEnd: data.dateRangeEnd,
-  //         },
-  //       }
-  //     );
-  //     return response.data.attendances.map((a: any) => new Attendance(a));
-  //   } catch (error) {
-  //     throw ApiClient.convertError(error);
-  //   }
-  // }
+  async login(data: {
+    email: string;
+    password: string;
+  }): Promise<string> {
+    try {
+      console.log(data)
+      const response = await this.axios.post("session", {
+        session: {
+          email: data.email,
+          password: data.password,
+        }
+      });
+      return response.headers.location;
+    } catch (error) {
+      throw ApiClient.convertError(error);
+    }
+  }
+
+  async logout(): Promise<void> {
+    try {
+      await this.axios.delete("session");
+    } catch (error) {
+      throw ApiClient.convertError(error);
+    }
+  }
 
   static convertError(axiosError: AxiosError): ApiErrors {
     const response = axiosError.response;

@@ -38,11 +38,11 @@ module Admin
       private
 
       def user_params
-        params.require(:user).permit(:name, :email, :password, :role)
+        params.require(:user).permit(:name, :email, :password, :password_confirmation, :role)
       end
 
       def user_update_params
-        params.require(:user).permit(:name, :password, :role)
+        params.require(:user).permit(:name, :password, :password_confirmation, :role)
       end
 
       def set_user

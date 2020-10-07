@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   enum role: %i[admin employee]
 
-  validates :email, presence: true, uniqueness: true, email: true
+  validates :email, presence: true, uniqueness: true, length: { maximum: 255 }, mail_address_format: true
   validates :password, presence: true, length: { minimum: 8 }
   validates :role, presence: true, inclusion: { in: User.roles }
 

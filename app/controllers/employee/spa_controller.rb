@@ -7,14 +7,20 @@ module Employee
     end
 
     def not_found
+      set_props
+
       render :main, status: 404
     end
 
     def server_error
+      set_props
+
       render :main, status: 500
     end
 
     def no_routing
+      set_props
+
       render :main, status: 404
     end
 
