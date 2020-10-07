@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_06_033520) do
+ActiveRecord::Schema.define(version: 2020_10_07_130137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.string "year", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["year"], name: "index_feedbacks_on_year", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -25,4 +33,19 @@ ActiveRecord::Schema.define(version: 2020_10_06_033520) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "users_feedbacks", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "feedback_id", null: false
+    t.integer "reviewer_id", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["feedback_id"], name: "index_users_feedbacks_on_feedback_id"
+    t.index ["status"], name: "index_users_feedbacks_on_status"
+    t.index ["user_id", "feedback_id", "reviewer_id"], name: "index_users_feedbacks_user_feedback_reviewer", unique: true
+    t.index ["user_id"], name: "index_users_feedbacks_on_user_id"
+  end
+
+  add_foreign_key "users_feedbacks", "feedbacks"
+  add_foreign_key "users_feedbacks", "users"
 end
