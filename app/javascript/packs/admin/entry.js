@@ -9,6 +9,9 @@ import App from "./layout/App";
 import { BootstrapVue } from "bootstrap-vue";
 Vue.use(BootstrapVue);
 
+// Font Awesome
+import "@fortawesome/fontawesome-free/css/all.css";
+
 import "./assets/stylesheets/custom.scss";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 // TODO: Configure Vuex
@@ -20,6 +23,7 @@ Vue.use(VueRouter);
 const router = new VueRouter({
   mode: "history",
   routes,
+  linkActiveClass: "active",
 });
 
 const BASE_TITLE = "Admin";

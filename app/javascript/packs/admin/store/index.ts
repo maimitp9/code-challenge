@@ -19,10 +19,14 @@ const initialState: RootState = {
 
 import { mutations } from "./mutations";
 
+import { users } from "./users";
+
 const store: StoreOptions<RootState> = {
   state: initialState,
   mutations,
-  modules: {},
+  modules: {
+    users
+  },
 };
 
 export default new Vuex.Store<RootState>(store);

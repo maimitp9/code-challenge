@@ -2,6 +2,7 @@ import { AxiosInstance, AxiosRequestConfig, AxiosError } from "axios";
 
 import ApiError from "./ApiError";
 import ApiErrors from "./ApiErrors";
+import User from "../models/User";
 
 class ApiClient {
   axios: AxiosInstance;
@@ -47,6 +48,23 @@ class ApiClient {
   async logout(): Promise<void> {
     try {
       await this.axios.delete("session");
+    } catch (error) {
+      throw ApiClient.convertError(error);
+    }
+  }
+
+  async getUsers(): Promise<Array<User>> {
+    try {
+      const response = await this.axios.get("users");
+      return response.data.users.map(u =>  new User(u));
+    } catch (error) {
+      throw ApiClient.convertError(error);
+    }
+  }
+
+  async deleteUser(userId: number): Promise<void> {
+    try {
+      await this.axios.delete(`users/${userId}`);
     } catch (error) {
       throw ApiClient.convertError(error);
     }
