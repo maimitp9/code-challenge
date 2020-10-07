@@ -12,12 +12,12 @@ import HeaderNav from "../layout/HeaderNav";
 
 export default {
   components: {
-    HeaderNav
+    HeaderNav,
   },
   data: function () {
     return {
-      message: "Hello Vue!"
-    }
-  }
-}
+      message: "Hello Vue!",
+    };
+  },
+};
 </script>

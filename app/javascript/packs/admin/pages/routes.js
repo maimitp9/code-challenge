@@ -1,48 +1,48 @@
-import LogInPage from '../pages/Login';
+import LogInPage from "../pages/Login";
 import DashboardPage from "../pages/dashboard/Dashboard";
 
-import ErrorNotFoundPage from './error/NotFound';
-import ErrorServerErrorPage from './error/ServerError';
+import ErrorNotFoundPage from "./error/NotFound";
+import ErrorServerErrorPage from "./error/ServerError";
 
 const routes = [
   {
-    path: '/',
-    name: 'login',
+    path: "/",
+    name: "login",
     component: LogInPage,
     meta: {
       title: "Login",
       hideNavbar: true,
-    }
+    },
   },
   {
-    path: '/admin/dashboard',
-    name: 'dashboard',
-    component: DashboardPage
+    path: "/admin/dashboard",
+    name: "dashboard",
+    component: DashboardPage,
   },
   {
-    path: '/error/not_found',
-    name: 'notFound',
+    path: "/error/not_found",
+    name: "notFound",
     component: ErrorNotFoundPage,
     meta: {
-      title: 'Page Not Found'
-    }
+      title: "Page Not Found",
+    },
   },
   {
-    path: '/error/server_error',
-    name: 'serverError',
+    path: "/error/server_error",
+    name: "serverError",
     component: ErrorServerErrorPage,
     meta: {
-      title: 'Server Error'
-    }
+      title: "Server Error",
+    },
   },
   // no route match
   {
-    path: '*',
+    path: "*",
     component: ErrorNotFoundPage,
     meta: {
-      title: 'Page Not Found'
-    }
-  }
+      title: "Page Not Found",
+    },
+  },
 ];
 
 export default routes;

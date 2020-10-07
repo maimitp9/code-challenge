@@ -12,17 +12,17 @@ import HeaderNav from "../layout/HeaderNav";
 
 export default {
   components: {
-    HeaderNav
+    HeaderNav,
   },
   data: function () {
     return {
-      message: "Hello Vue!"
-    }
+      message: "Hello Vue!",
+    };
   },
   computed: {
     hideNavbar() {
-      return this.$route.matched.some(record => record.meta.hideNavbar);
+      return this.$route.matched.some((record) => record.meta.hideNavbar);
     },
   },
-}
+};
 </script>

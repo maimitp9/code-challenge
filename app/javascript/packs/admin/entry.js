@@ -2,50 +2,52 @@ import Vue from "vue";
 import { camelizeKeys } from "humps";
 
 // Init Vuex and store
-import store from './store';
+import store from "./store";
 
-import App from './layout/App';
+import App from "./layout/App";
 
-import { BootstrapVue } from 'bootstrap-vue';
-Vue.use(BootstrapVue)
+import { BootstrapVue } from "bootstrap-vue";
+Vue.use(BootstrapVue);
 
-import './assets/stylesheets/custom.scss';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
+import "./assets/stylesheets/custom.scss";
+import "bootstrap-vue/dist/bootstrap-vue.css";
 // TODO: Configure Vuex
 
-import VueRouter from 'vue-router';
-import routes from './pages/routes';
+import VueRouter from "vue-router";
+import routes from "./pages/routes";
 
 Vue.use(VueRouter);
 const router = new VueRouter({
-  mode: 'history',
-  routes
-})
+  mode: "history",
+  routes,
+});
 
-const BASE_TITLE = 'Admin';
+const BASE_TITLE = "Admin";
 
 router.beforeEach((to, _from, next) => {
   // TODO: check isAuthenticated
 
-  document.title = to.meta.title ? `${to.meta.title} | ${BASE_TITLE}` : BASE_TITLE;
+  document.title = to.meta.title
+    ? `${to.meta.title} | ${BASE_TITLE}`
+    : BASE_TITLE;
   next();
-})
+});
 
-document.addEventListener('DOMContentLoaded', () => {
-  const el = document.getElementById("app")
-  const props = camelizeKeys(JSON.parse(el.getAttribute('data-props')), {
-    deep: true
+document.addEventListener("DOMContentLoaded", () => {
+  const el = document.getElementById("app");
+  const props = camelizeKeys(JSON.parse(el.getAttribute("data-props")), {
+    deep: true,
   });
 
-  console.log(props)
+  console.log(props);
 
   store.commit("init", {
-    clientVersion: props.clientVersion
-  })
+    clientVersion: props.clientVersion,
+  });
   new Vue({
     el,
     router,
     store,
-    render: h => h(App)
-  })
-})
+    render: (h) => h(App),
+  });
+});

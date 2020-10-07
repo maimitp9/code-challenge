@@ -1,26 +1,40 @@
 <template>
-  <div>
+  <div class="container">
     <div class="row">
       <div class="col-md-4 offset-md-4">
-        <b-alert show variant="danger" v-if="errors.length > 0" color="error">
+        <b-alert v-if="errors.length > 0" show variant="danger" color="error">
           <ul v-for="err in errors" :key="err.message">
             <li>{{ err.message }}</li>
           </ul>
         </b-alert>
         <form @submit.prevent="submitLoginForm">
-        <div class="form-group">
-          <label for="email">Email address</label>
-          <input type="email" v-model="loginForm.email" class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" v-model="loginForm.password" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-primary" :loading="submitting"
-                  :disabled="submitting">Submit</button>
-      </form>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input
+              v-model="loginForm.email"
+              type="email"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              v-model="loginForm.password"
+              type="password"
+              class="form-control"
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            :loading="submitting"
+            :disabled="submitting"
+          >
+            Submit
+          </button>
+        </form>
       </div>
-   </div>
+    </div>
   </div>
 </template>
 
@@ -38,23 +52,23 @@ export default {
         password: "",
       },
       submitting: false,
-      errors: []
+      errors: [],
     };
   },
   computed: {
     ...mapState({
-      apiClient: "apiClient"
-    })
+      apiClient: "apiClient",
+    }),
   },
   methods: {
     async submitLoginForm() {
       this.errors = [];
       this.submitting = true;
-      console.log(this.apiClient)
+      console.log(this.apiClient);
       try {
         window.location.href = await this.apiClient.login(this.loginForm);
       } catch (errors) {
-        if(errors.status === 400) {
+        if (errors.status === 400) {
           this.errors = errors.errors;
         } else {
           this.handleApiErrors(errors, {
@@ -65,7 +79,7 @@ export default {
       } finally {
         this.submitting = false;
       }
-    }
-  }
+    },
+  },
 };
 </script>
