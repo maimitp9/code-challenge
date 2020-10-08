@@ -30,6 +30,12 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  activerecord:
+    errors:
+      messages:
+  errors:
+    messages:
+      invalid_mail_address_format: "Invalid email format"
   activemodel:
     errors:
       models:

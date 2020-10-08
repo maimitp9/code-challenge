@@ -3,10 +3,10 @@
 module Admin
   module Api
     class UsersController < ::Admin::Api::ApplicationController
-      before_action :set_user, only: %i[update destroy]
+      before_action :set_user, only: %i[show update destroy]
 
       def index
-        users = User.all
+        users = User.where.not(id: current_user.id)
 
         render json: users, status: :ok
       end
@@ -20,8 +20,12 @@ module Admin
         render json: user, status: :created
       end
 
+      def show
+        render json: @user, status: :ok
+      end
+
       def update
-        @user.assign_attributes(user_update_params)
+        @user.assign_attributes(user_params)
         render_active_model_errors(@user) and return if @user.invalid?
 
         @user.save!
@@ -39,10 +43,6 @@ module Admin
 
       def user_params
         params.require(:user).permit(:name, :email, :password, :password_confirmation, :role)
-      end
-
-      def user_update_params
-        params.require(:user).permit(:name, :password, :password_confirmation, :role)
       end
 
       def set_user

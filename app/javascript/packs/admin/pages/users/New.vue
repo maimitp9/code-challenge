@@ -1,7 +1,7 @@
 <template>
   <div class="mt-4">
     <div class="col-md-6 offset-md-3">
-      <b-card header="Edit User">
+      <b-card header="New User">
         <div>
           <b-alert :show="isSuccess" variant="success" dismissible>
             User successfully updated
@@ -24,6 +24,7 @@
 
           <b-form-group
             label="Employee Name:"
+            label-for="input-2"
           >
             <b-form-input
               v-model="form.name"
@@ -32,10 +33,10 @@
             ></b-form-input>
           </b-form-group>
 
-          <b-form-group label="Password">
+          <b-form-group label="Password" label-for="input-2">
             <b-form-input type="password" v-model="form.password" required></b-form-input>
           </b-form-group>
-          <b-form-group label="Confirm Password">
+          <b-form-group label="Confirm Password" label-for="input-2">
             <b-form-input type="password" v-model="form.password_confirmation" required></b-form-input>
           </b-form-group>
           <b-form-group label="Role">
@@ -56,16 +57,9 @@ import ApiErrorHandler from "../../mixins/ApiErrorHandler";
 
 export default {
   mixins: [ApiErrorHandler],
-  props: {
-    userId: {
-      type: Number,
-      required: true,
-    }
-  },
   data() {
     return {
       form: {
-        id: null,
         email: "",
         name: "",
         password: null,
@@ -77,21 +71,8 @@ export default {
       errors: [],
     };
   },
-  created() {
-    this.getUser();
-  },
   methods: {
-    async getUser() {
-      try {
-        this.form = await this.$store.dispatch("users/getUser", { userId: this.userId });
-      } catch (errors) {
-        this.handleApiErrors(errors, {
-          store: this.$store,
-          router: this.$router,
-        });
-      }
-    },
-    async submitForm() {
+     async submitForm() {
       if (this.submitting) {
         return;
       }
@@ -99,7 +80,7 @@ export default {
       this.submitting = true;
       this.errors = [];
       try {
-        this.form = await this.$store.dispatch("users/updateUser", this.form);
+        this.form = await this.$store.dispatch("users/createUser", this.form);
         this.isSuccess = true;
       } catch (errors) {
         if (errors.status === 400) {

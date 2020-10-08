@@ -62,6 +62,53 @@ class ApiClient {
     }
   }
 
+  async createUser(data: { id: number, name: string, email: string, password: string, password_confirmation: string, role: string }): Promise<User> {
+    try {
+      const response = await this.axios.post("users", {
+        user: {
+          name: data.name,
+          email: data.email,
+          password: data.password,
+          password_confirmation: data.password_confirmation,
+          role: data.role,
+        },
+      });
+      return new User(response.data.user);
+    } catch (error) {
+      throw ApiClient.convertError(error);
+    }
+  }
+
+  async getUser(userId: number): Promise<User> {
+    try {
+      const response = await this.axios.get(`users/${userId}`);
+      console.log(response.data.user);
+      return new User(response.data.user);
+    } catch (error) {
+      throw ApiClient.convertError(error);
+    }
+  }
+
+  async updateUser(data: { id: number, name: string, email: string, password: string, password_confirmation: string, role: string }): Promise<User> {
+    try {
+      console.log("client", data);
+      const response = await this.axios.put(`users/${data.id}`, {
+        user: {
+          id: data.id,
+          name: data.name,
+          email: data.email,
+          password: data.password,
+          password_confirmation: data.password_confirmation,
+          role: data.role,
+        },
+      });
+      console.log("calling",response.data.user);
+      return new User(response.data.user);
+    } catch (error) {
+      throw ApiClient.convertError(error);
+    }
+  }
+
   async deleteUser(userId: number): Promise<void> {
     try {
       await this.axios.delete(`users/${userId}`);

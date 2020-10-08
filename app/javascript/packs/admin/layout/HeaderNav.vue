@@ -1,6 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Admin</a>
+    <router-link :to="{
+              name: 'dashboard',
+            }" class="navbar-brand">Admin</router-link>
     <button
       class="navbar-toggler"
       type="button"
@@ -15,13 +17,41 @@
 
     <div id="navbarSupportedContent" class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
+        <li class="nav-item">
           <router-link
             :to="{
               name: 'users',
             }"
             class="nav-link"
             >Users
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link
+            :to="{
+              name: 'userShow',
+              params: { userId: currentUser && currentUser.id }
+            }"
+            class="nav-link"
+            >My Profile
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link
+            :to="{
+              name: 'feedbackNew',
+            }"
+            class="nav-link"
+            >Create Feedback
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link
+            :to="{
+              name: 'assignFeedback',
+            }"
+            class="nav-link"
+            >Assign Feedback
           </router-link>
         </li>
         <li class="nav-item">
@@ -42,7 +72,11 @@ export default {
   computed: {
     ...mapState({
       apiClient: "apiClient",
+      currentUser: "currentUser",
     }),
+  },
+  created() {
+    console.log("I am here",this.currentUser);
   },
   methods: {
     async logout() {

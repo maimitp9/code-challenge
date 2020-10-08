@@ -15,6 +15,7 @@ const apiClient = new ApiClient({
 const initialState: RootState = {
   apiClient: apiClient,
   clientVersion: 0,
+  currentUser: undefined,
 };
 
 import { mutations } from "./mutations";

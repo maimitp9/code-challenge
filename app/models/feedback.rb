@@ -5,7 +5,9 @@ class Feedback < ApplicationRecord
 
   has_many :users_feedbacks
   has_many :users, through: :users_feedbacks
+  has_many :feedbacks_questions_answers, foreign_key: 'feedback_id'
 
-  validates :year, presence: true, uniqueness: true
+  validates :title, presence: true, uniqueness: true
   validates :status, presence: true, inclusion: { in: Feedback.statuses }
+  USE_COLUMN_NAMES = %i[title status].freeze
 end

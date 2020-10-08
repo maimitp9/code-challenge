@@ -23,7 +23,7 @@ Vue.use(VueRouter);
 const router = new VueRouter({
   mode: "history",
   routes,
-  linkActiveClass: "active",
+  linkExactActiveClass: "active",
 });
 
 const BASE_TITLE = "Admin";
@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   store.commit("init", {
     clientVersion: props.clientVersion,
+    currentUser: props.currentUser
   });
   new Vue({
     el,
