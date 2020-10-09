@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+
+module Employee
+  module Api
+    class FeedbackSerializer < ActiveModel::Serializer
+      type :feedback
+
+      Feedback::USE_COLUMN_NAMES.each do |attr|
+        attribute attr, if: -> { object.respond_to?(attr) }
+      end
+
+      has_many :questions, if: -> { scope && scope[:questions] }
+      has_many :users, if: -> { scope && scope[:users] }
+      has_many :users_feedbacks, if: -> { scope && scope[:users_feedbacks] }
+      has_many :feedbacks_questions, if: -> { scope && scope[:feedbacks_questions] }
+    end
+  end
+end

@@ -2,9 +2,9 @@
 
 FactoryBot.define do
   factory :users_feedback do
-    user { nil }
-    feedback { nil }
-    reviewer_id { 1 }
-    status { 'MyString' }
+    user { '' }
+    feedback { '' }
+    question { '' }
+    answer { '' }
   end
 end

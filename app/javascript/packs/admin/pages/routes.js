@@ -3,6 +3,11 @@ import DashboardPage from "../pages/dashboard/Dashboard";
 import UserListPage from "../pages/users/List";
 import UserShowPage from "../pages/users/Show";
 import UserEditPage from "../pages/users/Edit";
+import UserNewPage from "../pages/users/New";
+
+import FeedbackListPage from "../pages/feedbacks/List";
+import FeedbackNewPage from "../pages/feedbacks/New";
+import FeedbackAssignPage from "../pages/feedbacks/Show";
 
 import ErrorNotFoundPage from "./error/NotFound";
 import ErrorServerErrorPage from "./error/ServerError";
@@ -24,11 +29,11 @@ const routes = [
   },
   {
     path: "/admin/users",
-    name: "users",
+    name: "usersList",
     component: UserListPage,
   },
   {
-    path: "/admin/users/:userId",
+    path: "/admin/users/:userId/show",
     name: "userShow",
     component: UserShowPage,
     props: (route) => {
@@ -38,12 +43,37 @@ const routes = [
     },
   },
   {
-    path: "/admin/users/:userId",
+    path: "/admin/users/new",
+    name: "userNew",
+    component: UserNewPage,
+  },
+  {
+    path: "/admin/users/:userId/edit",
     name: "userEdit",
     component: UserEditPage,
     props: (route) => {
       return {
         userId: parseInt(route.params.userId),
+      };
+    },
+  },
+  {
+    path: "/admin/feedbacks",
+    name: "feedbackList",
+    component: FeedbackListPage,
+  },
+  {
+    path: "/admin/feedbacks/new",
+    name: "feedbackNew",
+    component: FeedbackNewPage,
+  },
+  {
+    path: "/admin/feedbacks/:feedbackId/assign",
+    name: "feedbackAssign",
+    component: FeedbackAssignPage,
+    props: (route) => {
+      return {
+        feedbackId: parseInt(route.params.feedbackId),
       };
     },
   },

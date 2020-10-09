@@ -3,6 +3,7 @@ import { AxiosInstance, AxiosRequestConfig, AxiosError } from "axios";
 import ApiError from "./ApiError";
 import ApiErrors from "./ApiErrors";
 import User from "../models/User";
+import Feedback from "../models/Feedback";
 
 class ApiClient {
   axios: AxiosInstance;
@@ -32,7 +33,6 @@ class ApiClient {
     password: string;
   }): Promise<string> {
     try {
-      console.log(data)
       const response = await this.axios.post("session", {
         session: {
           email: data.email,
@@ -62,9 +62,97 @@ class ApiClient {
     }
   }
 
+  async createUser(data: { id: number, name: string, email: string, password: string, password_confirmation: string, role: string }): Promise<User> {
+    try {
+      const response = await this.axios.post("users", {
+        user: {
+          name: data.name,
+          email: data.email,
+          password: data.password,
+          password_confirmation: data.password_confirmation,
+          role: data.role,
+        },
+      });
+      return new User(response.data.user);
+    } catch (error) {
+      throw ApiClient.convertError(error);
+    }
+  }
+
+  async getUser(userId: number): Promise<User> {
+    try {
+      const response = await this.axios.get(`users/${userId}`);
+      return new User(response.data.user);
+    } catch (error) {
+      throw ApiClient.convertError(error);
+    }
+  }
+
+  async updateUser(data: { id: number, name: string, email: string, password: string, password_confirmation: string, role: string }): Promise<User> {
+    try {
+      const response = await this.axios.put(`users/${data.id}`, {
+        user: {
+          id: data.id,
+          name: data.name,
+          email: data.email,
+          password: data.password,
+          password_confirmation: data.password_confirmation,
+          role: data.role,
+        },
+      });
+      return new User(response.data.user);
+    } catch (error) {
+      throw ApiClient.convertError(error);
+    }
+  }
+
   async deleteUser(userId: number): Promise<void> {
     try {
       await this.axios.delete(`users/${userId}`);
+    } catch (error) {
+      throw ApiClient.convertError(error);
+    }
+  }
+
+  // Feedbacks APIs
+  async getFeedbacks(): Promise<Array<Feedback>> {
+    try {
+      const response = await this.axios.get("feedbacks");
+      return response.data.feedbacks.map(u =>  new Feedback(u));
+    } catch (error) {
+      throw ApiClient.convertError(error);
+    }
+  }
+  async createFeedback(data: { title: string, status: string, questions: Array<{text: string}> }): Promise<void> {
+    try {
+      await this.axios.post("feedbacks", {
+        feedback: {
+          title: data.title,
+          status: data.status,
+          questions: data.questions,
+        },
+      });
+    } catch (error) {
+      throw ApiClient.convertError(error);
+    }
+  }
+  async getFeedback(feedbackId: number): Promise<Feedback> {
+    try {
+      const response = await this.axios.get(`feedbacks/${feedbackId}`);
+      return new Feedback(response.data.feedback);
+    } catch (error) {
+      throw ApiClient.convertError(error);
+    }
+  }
+  async assignFeedback(data: { user_id: number, feedback_id: number, reviewer_id: number }): Promise<void> {
+    try {
+      await this.axios.post("users_feedbacks", {
+        usersFeedback: {
+          user_id: data.user_id,
+          feedback_id: data.feedback_id,
+          reviewer_id: data.reviewer_id,
+        },
+      });
     } catch (error) {
       throw ApiClient.convertError(error);
     }

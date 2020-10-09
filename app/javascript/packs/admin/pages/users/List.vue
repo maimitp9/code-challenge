@@ -1,8 +1,13 @@
 <template>
-  <div>
+  <div class="mt-4">
     <div class="row">
       <div class="col-12">
-        <section v-if="users.length > 0">
+        <div class="text-right">
+          <router-link :to="{ name: 'userNew' }">
+            <button type="button" class="btn btn-success">New User</button>
+          </router-link>
+        </div>
+        <section v-if="users.length > 0" class="mt-2">
           <table class="table table-bordered">
             <thead>
               <tr>

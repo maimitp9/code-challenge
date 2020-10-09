@@ -15,17 +15,20 @@ const apiClient = new ApiClient({
 const initialState: RootState = {
   apiClient: apiClient,
   clientVersion: 0,
+  currentUser: undefined,
 };
 
 import { mutations } from "./mutations";
 
 import { users } from "./users";
+import { feedbacks } from "./feedbacks";
 
 const store: StoreOptions<RootState> = {
   state: initialState,
   mutations,
   modules: {
-    users
+    users,
+    feedbacks,
   },
 };
 

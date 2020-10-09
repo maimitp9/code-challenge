@@ -10,17 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_07_130137) do
+ActiveRecord::Schema.define(version: 2020_10_09_115356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "feedbacks", force: :cascade do |t|
-    t.string "year", null: false
-    t.integer "status", default: 0, null: false
+    t.string "title"
+    t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["year"], name: "index_feedbacks_on_year", unique: true
+    t.index ["status"], name: "index_feedbacks_on_status"
+    t.index ["title"], name: "index_feedbacks_on_title", unique: true
+  end
+
+  create_table "feedbacks_questions", force: :cascade do |t|
+    t.bigint "feedback_id", null: false
+    t.bigint "question_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["feedback_id", "question_id"], name: "index_feedbacks_questions_on_feedback_id_and_question_id"
+    t.index ["feedback_id"], name: "index_feedbacks_questions_on_feedback_id"
+    t.index ["question_id"], name: "index_feedbacks_questions_on_question_id"
+  end
+
+  create_table "feedbacks_questions_answers", force: :cascade do |t|
+    t.bigint "feedbacks_question_id", null: false
+    t.string "text", null: false
+    t.integer "user_id", null: false
+    t.integer "reviewer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["feedbacks_question_id"], name: "index_feedbacks_questions_answers_on_feedbacks_question_id"
+    t.index ["reviewer_id"], name: "index_feedbacks_questions_answers_on_reviewer_id"
+    t.index ["user_id"], name: "index_feedbacks_questions_answers_on_user_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string "text"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -34,18 +63,18 @@ ActiveRecord::Schema.define(version: 2020_10_07_130137) do
   end
 
   create_table "users_feedbacks", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "feedback_id", null: false
+    t.bigint "user_id"
+    t.bigint "feedback_id"
     t.integer "reviewer_id", null: false
-    t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "status", default: 0, null: false
     t.index ["feedback_id"], name: "index_users_feedbacks_on_feedback_id"
-    t.index ["status"], name: "index_users_feedbacks_on_status"
-    t.index ["user_id", "feedback_id", "reviewer_id"], name: "index_users_feedbacks_user_feedback_reviewer", unique: true
+    t.index ["user_id", "feedback_id", "reviewer_id"], name: "index_users_feedbacks_on_user_feedback", unique: true
     t.index ["user_id"], name: "index_users_feedbacks_on_user_id"
   end
 
-  add_foreign_key "users_feedbacks", "feedbacks"
-  add_foreign_key "users_feedbacks", "users"
+  add_foreign_key "feedbacks_questions", "feedbacks"
+  add_foreign_key "feedbacks_questions", "questions"
+  add_foreign_key "feedbacks_questions_answers", "feedbacks_questions"
 end

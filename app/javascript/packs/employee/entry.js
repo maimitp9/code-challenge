@@ -39,10 +39,9 @@ document.addEventListener("DOMContentLoaded", () => {
     deep: true,
   });
 
-  console.log(props);
-
   store.commit("init", {
     clientVersion: props.clientVersion,
+    currentUser: props.currentUser,
   });
   new Vue({
     el,
