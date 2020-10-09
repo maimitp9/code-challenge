@@ -7,9 +7,10 @@ Rails.application.routes.draw do
   # Admin routes
   namespace :admin do
     namespace :api do
-      resources :users
-      resources :feedbacks
       resource :session, only: %i[create destroy]
+      resources :users
+      resources :feedbacks, only: %i[show create update]
+      resource :questions, only: %i[create update]
     end
   end
 
@@ -35,6 +36,7 @@ Rails.application.routes.draw do
 
     scope :feedbacks do
       get 'new', to: 'spa#main'
+      get ':id/show', to: 'spa#main'
       get 'assign_feedback', to: 'spa#main'
     end
 

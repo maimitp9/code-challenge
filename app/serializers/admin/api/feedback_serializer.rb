@@ -9,6 +9,7 @@ module Admin
         attribute attr, if: -> { object.respond_to?(attr) }
       end
 
+      has_many :questions, if: -> { scope && scope[:questions] }
       has_many :users, if: -> { scope && scope[:users] }
       has_many :users_feedbacks, if: -> { scope && scope[:users_feedbacks] }
     end

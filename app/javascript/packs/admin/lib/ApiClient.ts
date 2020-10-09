@@ -3,6 +3,7 @@ import { AxiosInstance, AxiosRequestConfig, AxiosError } from "axios";
 import ApiError from "./ApiError";
 import ApiErrors from "./ApiErrors";
 import User from "../models/User";
+import Feedback from "../models/Feedback";
 
 class ApiClient {
   axios: AxiosInstance;
@@ -112,6 +113,31 @@ class ApiClient {
   async deleteUser(userId: number): Promise<void> {
     try {
       await this.axios.delete(`users/${userId}`);
+    } catch (error) {
+      throw ApiClient.convertError(error);
+    }
+  }
+
+  // Feedbacks APIs
+  async createFeedback(data: { title: string, status: string, questions: Array<{text: string}> }): Promise<void> {
+    try {
+      console.log("client",data)
+      await this.axios.post("feedbacks", {
+        feedback: {
+          title: data.title,
+          status: data.status,
+          questions: data.questions,
+        },
+      });
+    } catch (error) {
+      throw ApiClient.convertError(error);
+    }
+  }
+  async getFeedback(feedbackId: number): Promise<Feedback> {
+    try {
+      const response = await this.axios.get(`feedbacks/${feedbackId}`);
+      console.log(response.data.feedback);
+      return new Feedback(response.data.feedback);
     } catch (error) {
       throw ApiClient.convertError(error);
     }

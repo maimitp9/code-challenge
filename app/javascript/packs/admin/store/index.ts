@@ -21,12 +21,14 @@ const initialState: RootState = {
 import { mutations } from "./mutations";
 
 import { users } from "./users";
+import { feedbacks } from "./feedbacks";
 
 const store: StoreOptions<RootState> = {
   state: initialState,
   mutations,
   modules: {
-    users
+    users,
+    feedbacks,
   },
 };
 

@@ -5,6 +5,7 @@ import UserShowPage from "../pages/users/Show";
 import UserEditPage from "../pages/users/Edit";
 import UserNewPage from "../pages/users/New";
 import FeedbackNewPage from "../pages/feedbacks/New";
+import FeedbackShowPage from "../pages/feedbacks/Show";
 import AssignFeedbackPage from "../pages/feedbacks/AssignFeedback";
 
 import ErrorNotFoundPage from "./error/NotFound";
@@ -59,6 +60,16 @@ const routes = [
     path: "/admin/feedbacks/new",
     name: "feedbackNew",
     component: FeedbackNewPage,
+  },
+  {
+    path: "/admin/users/:feedbackId/show",
+    name: "feedbackShow",
+    component: FeedbackShowPage,
+    props: (route) => {
+      return {
+        feedbackId: parseInt(route.params.feedbackId),
+      };
+    },
   },
   {
     path: "/admin/feedbacks/assign_feedback",

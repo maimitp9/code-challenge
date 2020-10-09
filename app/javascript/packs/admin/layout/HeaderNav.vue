@@ -1,8 +1,12 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <router-link :to="{
-              name: 'dashboard',
-            }" class="navbar-brand">Admin</router-link>
+    <router-link
+      :to="{
+        name: 'dashboard',
+      }"
+      class="navbar-brand"
+      >Admin</router-link
+    >
     <button
       class="navbar-toggler"
       type="button"
@@ -30,7 +34,7 @@
           <router-link
             :to="{
               name: 'userShow',
-              params: { userId: currentUser && currentUser.id }
+              params: { userId: currentUser && currentUser.id },
             }"
             class="nav-link"
             >My Profile
@@ -76,7 +80,7 @@ export default {
     }),
   },
   created() {
-    console.log("I am here",this.currentUser);
+    console.log("I am here", this.currentUser);
   },
   methods: {
     async logout() {

@@ -3,6 +3,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  rescue_from Exception, with: :render_500
+  rescue_from ActiveRecord::RecordNotFound, with: :render_404
+  rescue_from ActionController::RoutingError, with: :render_404
+  rescue_from ActionView::MissingTemplate, with: :render_404
+
   def logged_in?
     session[:user_id].present?
   end
@@ -43,5 +48,20 @@ class ApplicationController < ActionController::Base
   # @param [Integer] status
   def render_errors(errors, status:)
     render json: { errors: Array(errors) }, status: status
+  end
+
+  def render_404(e = nil)
+    logger.info("Rendering 404 with exception: #{e.message}") if e
+
+    render file: Rails.root.join('public', '404.html'), status: 404, layout: false,
+           content_type: 'text/html'
+  end
+
+  def render_500(e)
+    logger.error(e)
+    error_msg = "500 error occurred, request_id: #{request.request_id}, error: #{e.message}"
+
+    render file: Rails.root.join('public', '500.html'), status: 500, layout: false,
+           content_type: 'text/html'
   end
 end

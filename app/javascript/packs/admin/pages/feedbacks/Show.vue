@@ -21,8 +21,16 @@
               <td scope="row">{{ user.id }}</td>
             </tr>
             <tr>
-              <th scope="col">Title:</th>
+              <th scope="col">Name:</th>
               <td scope="row">{{ user.name }}</td>
+            </tr>
+            <tr>
+              <th scope="col">Email:</th>
+              <td scope="row">{{ user.email }}</td>
+            </tr>
+            <tr>
+              <th scope="col">Role:</th>
+              <td scope="row">{{ user.role }}</td>
             </tr>
           </tbody>
         </table>
@@ -37,24 +45,24 @@ import ApiErrorHandler from "../../mixins/ApiErrorHandler";
 export default {
   mixins: [ApiErrorHandler],
   props: {
-    userId: {
+    feedbackId: {
       type: Number,
       required: true,
     },
   },
   data() {
     return {
-      user: undefined,
+      feedback: undefined,
     };
   },
   created() {
-    this.getUser();
+    this.getFeedback();
   },
   methods: {
-    async getUser() {
+    async getFeedback() {
       try {
-        this.user = await this.$store.dispatch("users/getUser", {
-          userId: this.userId,
+        this.feedback = await this.$store.dispatch("feedbacks/getFeedback", {
+          feedbackId: this.feedbackId,
         });
       } catch (errors) {
         this.handleApiErrors(errors, {

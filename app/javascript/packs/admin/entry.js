@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   store.commit("init", {
     clientVersion: props.clientVersion,
-    currentUser: props.currentUser
+    currentUser: props.currentUser,
   });
   new Vue({
     el,

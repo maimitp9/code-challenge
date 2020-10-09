@@ -1,5 +1,3 @@
 <template>
-  <div>
-    Assign Feedback
-  </div>
+  <div>Assign Feedback</div>
 </template>

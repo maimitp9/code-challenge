@@ -2,8 +2,9 @@
 
 FactoryBot.define do
   factory :feedbacks_questions_answer do
-    feedback { nil }
-    question { nil }
-    qnaswer { nil }
+    feedback_question { nil }
+    text { 'MyString' }
+    user_id { 1 }
+    reviewer_id { 1 }
   end
 end

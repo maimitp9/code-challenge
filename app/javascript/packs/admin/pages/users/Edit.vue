@@ -22,9 +22,7 @@
             ></b-form-input>
           </b-form-group>
 
-          <b-form-group
-            label="Employee Name:"
-          >
+          <b-form-group label="Employee Name:">
             <b-form-input
               v-model="form.name"
               required
@@ -33,17 +31,29 @@
           </b-form-group>
 
           <b-form-group label="Password">
-            <b-form-input type="password" v-model="form.password" required></b-form-input>
+            <b-form-input
+              v-model="form.password"
+              type="password"
+              required
+            ></b-form-input>
           </b-form-group>
           <b-form-group label="Confirm Password">
-            <b-form-input type="password" v-model="form.password_confirmation" required></b-form-input>
+            <b-form-input
+              v-model="form.password_confirmation"
+              type="password"
+              required
+            ></b-form-input>
           </b-form-group>
           <b-form-group label="Role">
             <b-form-radio v-model="form.role" value="admin">Admin</b-form-radio>
-            <b-form-radio v-model="form.role" value="employee">Employee</b-form-radio>
+            <b-form-radio v-model="form.role" value="employee"
+              >Employee</b-form-radio
+            >
           </b-form-group>
 
-          <b-button type="submit" :disabled="submitting" variant="primary">Submit</b-button>
+          <b-button type="submit" :disabled="submitting" variant="primary"
+            >Submit</b-button
+          >
           <b-button type="reset" variant="danger">Back</b-button>
         </b-form>
       </b-card>
@@ -60,7 +70,7 @@ export default {
     userId: {
       type: Number,
       required: true,
-    }
+    },
   },
   data() {
     return {
@@ -83,7 +93,9 @@ export default {
   methods: {
     async getUser() {
       try {
-        this.form = await this.$store.dispatch("users/getUser", { userId: this.userId });
+        this.form = await this.$store.dispatch("users/getUser", {
+          userId: this.userId,
+        });
       } catch (errors) {
         this.handleApiErrors(errors, {
           store: this.$store,

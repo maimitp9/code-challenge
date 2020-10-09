@@ -33,6 +33,7 @@ en:
   activerecord:
     errors:
       messages:
+        record_invalid: "Invalid record"
   errors:
     messages:
       invalid_mail_address_format: "Invalid email format"

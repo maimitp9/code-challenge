@@ -22,10 +22,7 @@
             ></b-form-input>
           </b-form-group>
 
-          <b-form-group
-            label="Employee Name:"
-            label-for="input-2"
-          >
+          <b-form-group label="Employee Name:" label-for="input-2">
             <b-form-input
               v-model="form.name"
               required
@@ -34,17 +31,29 @@
           </b-form-group>
 
           <b-form-group label="Password" label-for="input-2">
-            <b-form-input type="password" v-model="form.password" required></b-form-input>
+            <b-form-input
+              v-model="form.password"
+              type="password"
+              required
+            ></b-form-input>
           </b-form-group>
           <b-form-group label="Confirm Password" label-for="input-2">
-            <b-form-input type="password" v-model="form.password_confirmation" required></b-form-input>
+            <b-form-input
+              v-model="form.password_confirmation"
+              type="password"
+              required
+            ></b-form-input>
           </b-form-group>
           <b-form-group label="Role">
             <b-form-radio v-model="form.role" value="admin">Admin</b-form-radio>
-            <b-form-radio v-model="form.role" value="employee">Employee</b-form-radio>
+            <b-form-radio v-model="form.role" value="employee"
+              >Employee</b-form-radio
+            >
           </b-form-group>
 
-          <b-button type="submit" :disabled="submitting" variant="primary">Submit</b-button>
+          <b-button type="submit" :disabled="submitting" variant="primary"
+            >Submit</b-button
+          >
           <b-button type="reset" variant="danger">Back</b-button>
         </b-form>
       </b-card>
@@ -72,7 +81,7 @@ export default {
     };
   },
   methods: {
-     async submitForm() {
+    async submitForm() {
       if (this.submitting) {
         return;
       }
