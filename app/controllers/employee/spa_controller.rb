@@ -2,6 +2,8 @@
 
 module Employee
   class SpaController < ::Employee::ApplicationController
+    skip_before_action :verify_authenticity_token
+
     def main
       set_props
     end
@@ -29,7 +31,8 @@ module Employee
     def set_props
       @props = {
         environment: ::Rails.env,
-        client_version: self.class.current_version
+        client_version: self.class.current_version,
+        current_user: current_user
       }
     end
   end

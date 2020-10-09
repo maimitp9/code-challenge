@@ -2,11 +2,6 @@
   <div class="mt-4">
     <div class="col-md-6 offset-md-3">
       <b-card header="New User">
-        <div>
-          <b-alert :show="isSuccess" variant="success" dismissible>
-            User successfully updated
-          </b-alert>
-        </div>
         <b-alert v-if="errors.length > 0" show variant="danger" color="error">
           <ul v-for="err in errors" :key="err.message">
             <li>{{ err.message }}</li>
@@ -54,7 +49,6 @@
           <b-button type="submit" :disabled="submitting" variant="primary"
             >Submit</b-button
           >
-          <b-button type="reset" variant="danger">Back</b-button>
         </b-form>
       </b-card>
     </div>
@@ -76,7 +70,6 @@ export default {
         role: null,
       },
       submitting: false,
-      isSuccess: false,
       errors: [],
     };
   },
@@ -89,8 +82,8 @@ export default {
       this.submitting = true;
       this.errors = [];
       try {
-        this.form = await this.$store.dispatch("users/createUser", this.form);
-        this.isSuccess = true;
+        await this.$store.dispatch("users/createUser", this.form);
+        this.$router.push({ name: "usersList" });
       } catch (errors) {
         if (errors.status === 400) {
           this.errors = errors.errors;

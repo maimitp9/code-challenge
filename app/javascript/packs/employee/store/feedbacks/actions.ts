@@ -2,6 +2,7 @@ import { ActionTree , Commit} from "vuex";
 import { RootState } from "../types";
 import { FeedbackState } from "./types";
 import Feedback from "../../models/Feedback";
+import Question from "../../models/Question";
 
 export const actions: ActionTree<FeedbackState, RootState> = {
   async getFeedbacks(
@@ -21,10 +22,10 @@ export const actions: ActionTree<FeedbackState, RootState> = {
   ): Promise<Feedback> {
     return await context.rootState.apiClient.getFeedback(payload.feedbackId);
   },
-  async assignFeedback(
+  async giveFeedback(
     context: { rootState: RootState },
-    payload: { user_id: number, feedback_id: number, reviewer_id: number }
+    payload: { userId: number, reviewerId: number, usersFeedbacksId: number, feedbacksQuestions: Array<{id: string, question: Question}>}
   ): Promise<void> {
-    await context.rootState.apiClient.assignFeedback(payload)
+    await context.rootState.apiClient.giveFeedback(payload);
   }
 };

@@ -24,7 +24,7 @@
         <li class="nav-item">
           <router-link
             :to="{
-              name: 'users',
+              name: 'usersList',
             }"
             class="nav-link"
             >Users
@@ -43,6 +43,15 @@
         <li class="nav-item">
           <router-link
             :to="{
+              name: 'feedbackList',
+            }"
+            class="nav-link"
+            >Feedbacks
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link
+            :to="{
               name: 'feedbackNew',
             }"
             class="nav-link"
@@ -50,16 +59,14 @@
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link
-            :to="{
-              name: 'assignFeedback',
-            }"
-            class="nav-link"
-            >Assign Feedback
-          </router-link>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" @click="logout">Logout</a>
+        </li>
+        <li class="nav-item text-right">
+          <strong>
+            <span class="nav-link text-primary">
+              Logged in User: {{ currentUser.name }}({{ currentUser.email }})
+            </span>
+          </strong>
         </li>
       </ul>
     </div>
@@ -78,9 +85,6 @@ export default {
       apiClient: "apiClient",
       currentUser: "currentUser",
     }),
-  },
-  created() {
-    console.log("I am here", this.currentUser);
   },
   methods: {
     async logout() {

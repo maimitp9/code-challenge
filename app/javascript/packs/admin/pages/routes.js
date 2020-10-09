@@ -4,9 +4,10 @@ import UserListPage from "../pages/users/List";
 import UserShowPage from "../pages/users/Show";
 import UserEditPage from "../pages/users/Edit";
 import UserNewPage from "../pages/users/New";
+
+import FeedbackListPage from "../pages/feedbacks/List";
 import FeedbackNewPage from "../pages/feedbacks/New";
-import FeedbackShowPage from "../pages/feedbacks/Show";
-import AssignFeedbackPage from "../pages/feedbacks/AssignFeedback";
+import FeedbackAssignPage from "../pages/feedbacks/Show";
 
 import ErrorNotFoundPage from "./error/NotFound";
 import ErrorServerErrorPage from "./error/ServerError";
@@ -28,7 +29,7 @@ const routes = [
   },
   {
     path: "/admin/users",
-    name: "users",
+    name: "usersList",
     component: UserListPage,
   },
   {
@@ -57,24 +58,24 @@ const routes = [
     },
   },
   {
+    path: "/admin/feedbacks",
+    name: "feedbackList",
+    component: FeedbackListPage,
+  },
+  {
     path: "/admin/feedbacks/new",
     name: "feedbackNew",
     component: FeedbackNewPage,
   },
   {
-    path: "/admin/users/:feedbackId/show",
-    name: "feedbackShow",
-    component: FeedbackShowPage,
+    path: "/admin/feedbacks/:feedbackId/assign",
+    name: "feedbackAssign",
+    component: FeedbackAssignPage,
     props: (route) => {
       return {
         feedbackId: parseInt(route.params.feedbackId),
       };
     },
-  },
-  {
-    path: "/admin/feedbacks/assign_feedback",
-    name: "assignFeedback",
-    component: AssignFeedbackPage,
   },
   {
     path: "/error/not_found",

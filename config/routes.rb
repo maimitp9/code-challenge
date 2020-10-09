@@ -9,15 +9,17 @@ Rails.application.routes.draw do
     namespace :api do
       resource :session, only: %i[create destroy]
       resources :users
-      resources :feedbacks, only: %i[show create update]
+      resources :feedbacks, only: %i[index show create update]
       resource :questions, only: %i[create update]
+      resource :users_feedbacks, only: %i[create]
     end
   end
 
   # Employee route
   namespace :employee do
     namespace :api do
-      resources :feedbacks
+      resources :feedbacks, only: %i[create index show]
+      resources :feedbacks_questions_answers, only: %i[create]
     end
   end
 
@@ -35,9 +37,9 @@ Rails.application.routes.draw do
     end
 
     scope :feedbacks do
+      get '/', to: 'spa#main'
       get 'new', to: 'spa#main'
-      get ':id/show', to: 'spa#main'
-      get 'assign_feedback', to: 'spa#main'
+      get ':id/assign', to: 'spa#main'
     end
 
     scope :error do
@@ -47,8 +49,13 @@ Rails.application.routes.draw do
   end
 
   # SPA Employee
-  scope :employee do
+  namespace :employee do
     get 'dashboard', to: 'spa#main'
+
+    scope :feedbacks do
+      get '/', to: 'spa#main'
+      get ':id/give_feedback', to: 'spa#main'
+    end
 
     scope :error do
       get 'not_found', to: 'spa#not_found'

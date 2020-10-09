@@ -4,7 +4,7 @@
       <div class="col-12">
         <div class="text-right">
           <router-link :to="{ name: 'userNew' }">
-            <button type="button" class="btn btn-primary">New User</button>
+            <button type="button" class="btn btn-success">New User</button>
           </router-link>
         </div>
         <section v-if="users.length > 0" class="mt-2">

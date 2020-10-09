@@ -1,6 +1,12 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Employee</a>
+    <router-link
+      :to="{
+        name: 'dashboard',
+      }"
+      class="navbar-brand"
+      >Employee</router-link
+    >
     <button
       class="navbar-toggler"
       type="button"
@@ -15,13 +21,24 @@
 
     <div id="navbarSupportedContent" class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#"
-            >Home <span class="sr-only">(current)</span></a
-          >
+        <li class="nav-item">
+          <router-link
+            :to="{
+              name: 'feedbackList',
+            }"
+            class="nav-link"
+            >Feedbacks
+          </router-link>
         </li>
         <li class="nav-item">
           <a class="nav-link" @click="logout">Logout</a>
+        </li>
+        <li class="nav-item text-right">
+          <strong>
+            <span class="nav-link text-primary">
+              Logged in User: {{ currentUser.name }}({{ currentUser.email }})
+            </span>
+          </strong>
         </li>
       </ul>
     </div>
@@ -38,6 +55,7 @@ export default {
   computed: {
     ...mapState({
       apiClient: "apiClient",
+      currentUser: "currentUser",
     }),
   },
   methods: {

@@ -51,10 +51,9 @@
             >
           </b-form-group>
 
-          <b-button type="submit" :disabled="submitting" variant="primary"
+          <b-button type="submit" :disabled="submitting" variant="success"
             >Submit</b-button
           >
-          <b-button type="reset" variant="danger">Back</b-button>
         </b-form>
       </b-card>
     </div>

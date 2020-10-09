@@ -25,7 +25,6 @@ export const actions: ActionTree<UserState, RootState> = {
     context: { rootState: RootState },
     payload: { id: number, name: string, email: string, password: string, password_confirmation: string, role: string }
   ): Promise<User> {
-    console.log("calling", payload)
     return await context.rootState.apiClient.updateUser(payload);
   },
   async deleteUser(

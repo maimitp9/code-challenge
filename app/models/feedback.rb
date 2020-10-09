@@ -10,5 +10,5 @@ class Feedback < ApplicationRecord
 
   validates :title, presence: true
   validates :status, presence: true, inclusion: { in: Feedback.statuses }
-  USE_COLUMN_NAMES = %i[title status].freeze
+  USE_COLUMN_NAMES = %i[id title status].freeze
 end

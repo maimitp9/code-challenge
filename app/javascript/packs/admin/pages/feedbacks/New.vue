@@ -57,10 +57,9 @@
             </div>
           </div>
           <div class="mt-3">
-            <b-button type="submit" :disabled="submitting" variant="primary"
+            <b-button type="submit" :disabled="submitting" variant="success"
               >Submit</b-button
             >
-            <b-button type="reset" variant="danger">Back</b-button>
           </div>
         </b-form>
       </b-card>
@@ -95,7 +94,7 @@ export default {
       try {
         await this.$store.dispatch("feedbacks/createFeedback", this.form);
         this.$router.push({
-          name: "assignFeedback",
+          name: "feedbackList",
         });
       } catch (errors) {
         if (errors.status === 400) {

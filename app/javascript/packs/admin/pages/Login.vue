@@ -66,7 +66,6 @@ export default {
     async submitLoginForm() {
       this.errors = [];
       this.submitting = true;
-      console.log(this.apiClient);
       try {
         window.location.href = await this.apiClient.login(this.loginForm);
       } catch (errors) {

@@ -15,14 +15,18 @@ const apiClient = new ApiClient({
 const initialState: RootState = {
   apiClient: apiClient,
   clientVersion: 0,
+  currentUser: undefined,
 };
 
 import { mutations } from "./mutations";
+import { feedbacks } from "./feedbacks";
 
 const store: StoreOptions<RootState> = {
   state: initialState,
   mutations,
-  modules: {},
+  modules: {
+    feedbacks
+  },
 };
 
 export default new Vuex.Store<RootState>(store);

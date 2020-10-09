@@ -3,36 +3,20 @@
 module Admin
   module Api
     class FeedbacksController < ::Admin::Api::ApplicationController
-      before_action :set_feedback, only: :show
-
       def index
-        feedbacks = Feedback.includes(:questions)
+        feedbacks = Feedback.includes(:questions, users_feedbacks: %i[user reviewer])
 
         render json: feedbacks, status: :ok,
-               scope: { questions: true }
-        # feedbacks = Feedback.includes(users_feedbacks: [feedbacks_questions_answers_by_user: %i[user question answer]])
-
-        # render json: feedbacks, status: :ok,
-        #        scope: {
-        #          feedbacks: true,
-        #          users_feedbacks: true,
-        #          feedbacks_questions_answers_by_user: true,
-        #          user: true,
-        #          question: true,
-        #          answer: true
-        #        },
-        #        include: {
-        #          feedbacks: [],
-        #          users_feedbacks: [by_user: %i[user question answer]]
-        #        }
+               scope: { questions: true, users_feedbacks: true, user: true, reviewer: true },
+               include: { questions: [], users_feedbacks: %i[user reviewer] }
       end
 
       def show
-        # feedback = Feedback.includes(:questions)
+        feedback = Feedback.includes(:questions, users_feedbacks: %i[user reviewer]).find(params[:id])
 
-        render json: @feedback, status: :ok,
-               scope: { questions: true },
-               include: [:questions]
+        render json: feedback, status: :ok,
+               scope: { questions: true, users_feedbacks: true, user: true, reviewer: true },
+               include: { questions: [], users_feedbacks: %i[user reviewer] }
       end
 
       def create
@@ -50,10 +34,6 @@ module Admin
 
       def feedback_params
         params.require(:feedback).permit(:title, :status, questions: [:text])
-      end
-
-      def set_feedback
-        @feedback = Feedback.find(params[:id])
       end
     end
   end
