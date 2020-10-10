@@ -52,6 +52,16 @@
                   >
                     <i class="far fa-trash-alt"></i>
                   </button>
+                  <router-link
+                    :to="{
+                      name: 'userFeedback',
+                      params: { userId: user.id },
+                    }"
+                  >
+                    <button type="button" class="btn btn-info">
+                      View feedbacks
+                    </button>
+                  </router-link>
                 </td>
               </tr>
             </tbody>

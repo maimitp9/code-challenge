@@ -9,7 +9,11 @@ Rails.application.routes.draw do
     namespace :api do
       resource :session, only: %i[create destroy]
       resources :users
-      resources :feedbacks, only: %i[index show create update]
+      resources :feedbacks, only: %i[index show create update] do
+        collection do
+          get ':user_id/user_feedbacks', to: 'feedbacks#user_feedbacks'
+        end
+      end
       resource :questions, only: %i[create update]
       resource :users_feedbacks, only: %i[create]
     end

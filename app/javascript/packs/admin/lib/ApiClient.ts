@@ -157,6 +157,14 @@ class ApiClient {
       throw ApiClient.convertError(error);
     }
   }
+  async getUserFeedbacks(userId: number): Promise<Feedback[]> {
+    try {
+      const response = await this.axios.get(`feedbacks/${userId}/user_feedbacks`);
+      return response.data.feedbacks.map(f => new Feedback(f));
+    } catch (error) {
+      throw ApiClient.convertError(error);
+    }
+  }
 
   static convertError(axiosError: AxiosError): ApiErrors {
     const response = axiosError.response;

@@ -26,5 +26,11 @@ export const actions: ActionTree<FeedbackState, RootState> = {
     payload: { user_id: number, feedback_id: number, reviewer_id: number }
   ): Promise<void> {
     await context.rootState.apiClient.assignFeedback(payload)
-  }
+  },
+  async getUserFeedbacks(
+    context: { rootState: RootState },
+    payload: { userId: number }
+  ): Promise<Feedback[]> {
+    return await context.rootState.apiClient.getUserFeedbacks(payload.userId);
+  },
 };

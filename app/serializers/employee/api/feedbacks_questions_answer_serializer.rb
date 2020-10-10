@@ -7,7 +7,7 @@ module Employee
     class FeedbacksQuestionsAnswerSerializer < ActiveModel::Serializer
       type :feedbacks_questions_answer
 
-      attributes FeedbacksQuestionsAnswer::USE_COLUMN_NAMES
+      attributes %i[id feedbacks_question_id text user_id reviewer_id]
 
       has_one :feedback, if: -> { scope && scope[:feedback] }
       has_one :question, if: -> { scope && scope[:question] }
