@@ -2,18 +2,6 @@
   <div class="mt-4">
     <div class="col-md-6 offset-md-3">
       <b-card v-if="feedback" header="Feedback Questions">
-        <div class="text-right">
-          <!-- <router-link
-            :to="{
-              name: 'userEdit',
-              params: { userId: user.id },
-            }"
-          >
-            <button type="button" class="btn btn-success">
-              Edit <i class="fas fa-edit"></i>
-            </button>
-          </router-link> -->
-        </div>
         <b-alert v-if="errors.length > 0" show variant="danger" color="error">
           <ul v-for="err in errors" :key="err.message">
             <li>{{ err.message }}</li>

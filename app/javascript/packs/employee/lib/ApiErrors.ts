@@ -42,7 +42,7 @@ class ApiErrors {
         // TODO
         code: API_ERROR_CODE_DEFAULT_SERVER_ERROR_CODE,
         message:
-          "サーバーで問題が発生しています。しばらく待ってから、再度アクセスください。",
+          "There is a problem with your server. Please wait for a while and try again.",
       }),
     ];
   }
@@ -53,7 +53,7 @@ class ApiErrors {
         // TODO
         code: API_ERROR_CODE_DEFAULT_CLIENT_ERROR_CODE,
         message:
-          "ネットワーク通信で問題が発生しました。通信状況のよい場所で再度アクセスください。",
+          "There was a problem with the network communication. Please try again in a better location.",
       }),
     ];
   }

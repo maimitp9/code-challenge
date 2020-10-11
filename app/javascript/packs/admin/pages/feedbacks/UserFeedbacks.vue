@@ -3,51 +3,69 @@
     <div class="row">
       <div class="col-12">
         <section v-if="userFeedbacks.length > 0" class="mt-2">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Title</th>
-                <th scope="col">Status</th>
-                <th scope="col">Questions</th>
-                <th scope="col">User | Reviewer</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="feedback in userFeedbacks" :key="feedback.id">
-                <th scope="row">{{ feedback.id }}</th>
-                <td>{{ feedback.title }}</td>
-                <td>{{ feedback.status }}</td>
-                <td></td>
-                <td>
-                  <section v-if="feedback.usersFeedbacks.length > 0">
-                    <ul v-for="(uf, i) in feedback.usersFeedbacks" :key="i">
-                      <li>
-                        {{ uf.user.name }}({{ uf.user.email }}) |
-                        {{ uf.reviewer.name }}({{ uf.reviewer.email }}) ->
-                        <strong class="text-danger">{{ uf.status }}</strong>
-                      </li>
-                    </ul>
-                  </section>
-                  <section v-else>
-                    <ul>
-                      <li>Not assigned yet</li>
-                    </ul>
-                  </section>
-                </td>
-                <td>
-                  <router-link
-                    :to="{
-                      name: 'feedbackAssign',
-                      params: { feedbackId: feedback.id },
-                    }"
-                  >
-                  </router-link>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="col-md-6 offset-md-3">
+            <b-card
+              v-for="(feedback, i) in userFeedbacks"
+              :key="i"
+              :header="feedback.title"
+              class="mt-3"
+            >
+              <table class="table mt-2">
+                <tbody>
+                  <tr>
+                    <th scope="col">Id:</th>
+                    <td scope="row">{{ feedback.id }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Title:</th>
+                    <td scope="row">{{ feedback.title }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Status:</th>
+                    <td scope="row">{{ feedback.status }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="col">User:</th>
+                    <td scope="row">
+                      {{ feedback.usersFeedbacks[0].user.name }}({{
+                        feedback.usersFeedbacks[0].user.email
+                      }})
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Feedbacks:</th>
+                    <td scope="row">
+                      <section v-if="feedback.feedbacksQuestions.length > 0">
+                        <div
+                          v-for="(fq, j) in feedback.feedbacksQuestions"
+                          :key="j"
+                        >
+                          {{ ++j }}. {{ fq.question.text }}
+                          <ul
+                            v-for="(fq_answer,
+                            k) in fq.feedbacksQuestionsAnswers"
+                            :key="k"
+                          >
+                            <li>
+                              {{ fq_answer.answer }} =>
+                              <strong
+                                >{{ fq_answer.reviewer.name }} ({{
+                                  fq_answer.reviewer.email
+                                }})
+                              </strong>
+                            </li>
+                          </ul>
+                        </div>
+                      </section>
+                      <section v-else>
+                        <p>Questions not created</p>
+                      </section>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </b-card>
+          </div>
         </section>
         <section v-else>
           <h3 class="text-center">Feedbacks are empty, please create</h3>
@@ -83,7 +101,6 @@ export default {
           "feedbacks/getUserFeedbacks",
           { userId: this.userId }
         );
-        console.log(this.userFeedbacks);
       } catch (errors) {
         this.handleApiErrors(errors, {
           store: this.$store,

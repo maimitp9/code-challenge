@@ -29,12 +29,12 @@ export default Feedback;
 
 class usersFeedback {
   user: User;
-  reviewer: User;
+  reviewer?: User;
   status: string;
 
-  constructor(data: { user: User, reviewer: User, status: string}) {
+  constructor(data: { user: User, reviewer?: User, status: string}) {
     this.user = new User(data.user);
-    this.reviewer = new User(data.reviewer);
+    this.reviewer = data.reviewer && new User(data.reviewer);
     this.status = data.status;
   }
 }
@@ -63,10 +63,12 @@ class feedbacksQuestionsAnswer {
   id: number;
   feedbacksQuestionId?: number;
   answer?: string;
+  reviewer?: User;
 
-  constructor(data: { id?: number; feedbacksQuestionId?: number; text?: string; }) {
+  constructor(data: { id?: number; feedbacksQuestionId?: number; text?: string; reviewer?: User; }) {
     this.id = data.id;
     this.feedbacksQuestionId = data.feedbacksQuestionId;
     this.answer = data.text;
+    this.reviewer = data.reviewer;
   }
 }

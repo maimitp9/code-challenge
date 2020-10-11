@@ -42,7 +42,7 @@ module Admin
       def user_feedbacks
         feedbacks = Feedback.includes(
           :users_feedbacks,
-          feedbacks_questions: %i[question feedbacks_questions_answers]
+          feedbacks_questions: [:question, feedbacks_questions_answers: %i[reviewer]]
         ).where(
           users_feedbacks: { user_id: params[:user_id] },
           feedbacks_questions_answers: { user_id: params[:user_id] }
@@ -51,8 +51,8 @@ module Admin
                scope: { feedbacks_questions: true, question: true,
                         feedbacks_questions_answers: true, users_feedbacks: true,
                         user: true, reviewer: true },
-               include: { feedbacks_questions: %i[feedbacks_questions_answers question],
-                          users_feedbacks: %i[user reviewer] }
+               include: { feedbacks_questions: [:question, feedbacks_questions_answers: %i[reviewer]],
+                          users_feedbacks: %i[user] }
       end
 
       private

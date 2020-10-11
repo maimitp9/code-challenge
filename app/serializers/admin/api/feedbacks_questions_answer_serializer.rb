@@ -13,6 +13,7 @@ module Admin
       has_one :question, if: -> { scope && scope[:question] }
       has_one :answer, if: -> { scope && scope[:answer] }
       has_one :user, if: -> { scope && scope[:user] }
+      has_one :reviewer, if: -> { scope && scope[:reviewer] }
     end
   end
 end
