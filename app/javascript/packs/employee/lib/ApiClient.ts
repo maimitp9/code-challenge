@@ -61,7 +61,6 @@ class ApiClient {
   async getFeedback(feedbackId: number): Promise<Feedback> {
     try {
       const response = await this.axios.get(`feedbacks/${feedbackId}`);
-      console.log(response.data.feedback);
       return new Feedback(response.data.feedback);
     } catch (error) {
       throw ApiClient.convertError(error);

@@ -12,6 +12,7 @@ module Admin
       has_many :questions, if: -> { scope && scope[:questions] }
       has_many :users, if: -> { scope && scope[:users] }
       has_many :users_feedbacks, if: -> { scope && scope[:users_feedbacks] }
+      has_many :feedbacks_questions, if: -> { scope && scope[:feedbacks_questions] }
     end
   end
 end

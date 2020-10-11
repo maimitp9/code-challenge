@@ -142,7 +142,6 @@ export default {
       }
     },
     async submitForm() {
-      console.log(this.form);
       if (document.getElementsByClassName("is-invalid").length > 0) {
         return;
       }
