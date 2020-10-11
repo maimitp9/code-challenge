@@ -1,25 +1,114 @@
-# README
+# PayPay Code Challenge
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Getting Started
 
-Things you may want to cover:
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
 
 * Ruby version
 
-* System dependencies
+  - Ruby-2.7.2
 
-* Configuration
+* Rails vesrion
 
-* Database creation
+  - Rails-6.0.3.3
 
-* Database initialization
+* Frontend
+  - Vue.js - 2.6.12
 
-* How to run the test suite
+* Testing framework
+  - RSpec
 
-* Services (job queues, cache servers, search engines, etc.)
+### Installing
 
-* Deployment instructions
+A step by step series of examples that tell you how to get a development env running.
 
-* ...
-# code-challenge
+- Unzip the included file and move to the `code-challenge` directory from your terminal
+
+```
+cd code-challenge
+```
+
+- Install bundle to install the application dependencies
+
+```
+bundle install
+```
+
+- Install yarn dependencies
+
+```
+yarn install
+```
+
+
+## Database Configuration
+
+*PostgreSQL* used as database for this application.
+> Make sure PostgreSQL is installed in your machine and you have setup the  `database.yml` file correctly
+
+- Database creation
+
+```
+bundle exec rails db:create
+```
+
+- Tables migration
+
+```
+bundle exec rails db:migrate
+```
+
+- check the *db/schema.rb* after migration completed successfully
+- Run *db/seed.rb* file to create `admin user` for application login
+
+```
+bundle exec rails db:seed
+```
+
+## Running Tests
+
+Test cases written using *RSpec*
+
+### Test includes
+
+- Model specs
+- Request specs - Due to the time limit not written
+
+### How to run tests
+
+Run this command
+
+```
+bundle exec rspec
+```
+
+All the tests should be *GREEN* to pass all test cases
+
+## Running Application
+
+- Starting application
+
+> Make sure you are in the application folder and already installed application dependencies
+
+```
+foreman start
+```
+
+- Check the application on browser, open the any browser of your choice and hit the following in the browser url *http://localhost:3000/*
+
+> Make sure server listen on port 3000
+
+```
+localhost:3000
+```
+
+- Use the `admin user` credentials that we have created in above step.
+> Check an attached video in this zip file for better understanding of application flow.
+
+- *This application can not meet the full specification requirement there are some functionalities are still pending*
+
+## Author
+
+* **Maimit Patel** - [GitHub profile](https://github.com/maimitp9)
