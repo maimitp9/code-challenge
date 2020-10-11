@@ -34,6 +34,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   # binding.pry
+  gem 'faker'
   gem 'pry-rails'
 end
 

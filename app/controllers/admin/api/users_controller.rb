@@ -34,7 +34,7 @@ module Admin
       end
 
       def destroy
-        @user.destroy
+        @user.update!(status: 'inactive')
 
         head :no_content
       end

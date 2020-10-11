@@ -118,6 +118,7 @@ class ApiClient {
   async getFeedbacks(): Promise<Array<Feedback>> {
     try {
       const response = await this.axios.get("feedbacks");
+      console.log(response.data.feedbacks)
       return response.data.feedbacks.map(u =>  new Feedback(u));
     } catch (error) {
       throw ApiClient.convertError(error);

@@ -12,8 +12,6 @@ module Admin
         head :created
       end
 
-      def update; end
-
       private
 
       def question_params

@@ -12,8 +12,6 @@ module Admin
         render json: users_feedback, status: :created
       end
 
-      def update; end
-
       private
 
       def users_feedback_params

@@ -4,6 +4,8 @@ module Employee
   class SpaController < ::Employee::ApplicationController
     skip_before_action :verify_authenticity_token
 
+    before_action :abort_if_not_authenticate!, only: :main
+
     def main
       set_props
     end

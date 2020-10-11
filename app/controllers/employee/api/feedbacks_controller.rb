@@ -34,12 +34,6 @@ module Employee
                include: { feedbacks_questions: [:question],
                           users_feedbacks: %i[user reviewer] }
       end
-
-      def create
-        render json: {}
-      end
-
-      def update; end
     end
   end
 end
