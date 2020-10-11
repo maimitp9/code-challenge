@@ -50,16 +50,15 @@ class ApplicationController < ActionController::Base
     render json: { errors: Array(errors) }, status: status
   end
 
-  def render_404(e = nil)
+  def render_404(exception = nil)
     logger.info("Rendering 404 with exception: #{e.message}") if e
 
     render file: Rails.root.join('public', '404.html'), status: 404, layout: false,
            content_type: 'text/html'
   end
 
-  def render_500(e)
-    logger.error(e)
-    error_msg = "500 error occurred, request_id: #{request.request_id}, error: #{e.message}"
+  def render_500(exception)
+    logger.error(exception)
 
     render file: Rails.root.join('public', '500.html'), status: 500, layout: false,
            content_type: 'text/html'

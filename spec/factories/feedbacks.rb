@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :feedback do
-    title { 'MyString' }
+    title { 'Feedback' }
     status { 1 }
   end
 end

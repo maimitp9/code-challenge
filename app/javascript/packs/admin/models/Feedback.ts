@@ -29,10 +29,10 @@ export default Feedback;
 
 class usersFeedback {
   user: User;
-  reviewer?: User;
+  reviewer?: User | null;
   status: string;
 
-  constructor(data: { user: User, reviewer?: User, status: string}) {
+  constructor(data: { user: User, reviewer?: User | null, status: string}) {
     this.user = new User(data.user);
     this.reviewer = data.reviewer && new User(data.reviewer);
     this.status = data.status;
@@ -45,7 +45,7 @@ class feedbacksQuestion {
 
   constructor(data: { question?: Question; feedbacksQuestionsAnswers?: Array<feedbacksQuestionsAnswer>; }) {
     this.question = new Question(data.question);
-    this.feedbacksQuestionsAnswers = data.feedbacksQuestionsAnswers.map(fqa => new feedbacksQuestionsAnswer(fqa));
+    this.feedbacksQuestionsAnswers = data.feedbacksQuestionsAnswers && data.feedbacksQuestionsAnswers.map(fqa => new feedbacksQuestionsAnswer(fqa));
   }
 }
 
@@ -69,6 +69,6 @@ class feedbacksQuestionsAnswer {
     this.id = data.id;
     this.feedbacksQuestionId = data.feedbacksQuestionId;
     this.answer = data.text;
-    this.reviewer = data.reviewer;
+    this.reviewer = data.reviewer && data.reviewer;
   }
 }

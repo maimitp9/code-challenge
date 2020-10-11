@@ -5,6 +5,7 @@ class Feedback < ApplicationRecord
 
   has_many :users_feedbacks
   has_many :users, through: :users_feedbacks
+  has_many :reviewers, through: :users_feedbacks, class_name: 'User', foreign_key: 'reviewer_id'
   has_many :feedbacks_questions
   has_many :questions, through: :feedbacks_questions
 

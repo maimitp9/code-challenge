@@ -31,7 +31,6 @@ module ActiveModelErrorsConverter
 
   # @param [ActiveModel::Errors] errors
   # @param [Class] model_class
-  # @return [Array<User::Api::Error>]
   def self.convert(errors, model_class = nil)
     result = []
     errors.keys.each do |attr|

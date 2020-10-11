@@ -11,9 +11,6 @@ module Admin
 
       has_many :user, if: -> { scope && scope[:user] }
       has_many :reviewer, if: -> { scope && scope[:reviewer] }
-      # has_many :feedbacks_questions_answers_by_user,
-      #          key: :by_user,
-      #          if: -> { scope && scope[:feedbacks_questions_answers_by_user] }
     end
   end
 end

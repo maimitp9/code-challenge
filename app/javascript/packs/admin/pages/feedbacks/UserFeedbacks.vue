@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-12">
         <section v-if="userFeedbacks.length > 0" class="mt-2">
-          <div class="col-md-6 offset-md-3">
+          <div class="col-md-10 offset-md-2">
             <b-card
               v-for="(feedback, i) in userFeedbacks"
               :key="i"

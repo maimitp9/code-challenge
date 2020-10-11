@@ -22,8 +22,8 @@ Rails.application.routes.draw do
   # Employee route
   namespace :employee do
     namespace :api do
-      resources :feedbacks, only: %i[create index show]
-      resources :feedbacks_questions_answers, only: %i[create]
+      resources :feedbacks, only: %i[index show]
+      resource :feedbacks_questions_answers, only: %i[create]
     end
   end
 
@@ -69,9 +69,5 @@ Rails.application.routes.draw do
 
   %i[get post put patch delete].each do |http_method|
     send(http_method, '*path', to: 'admin/spa#no_routing')
-  end
-
-  %i[get post put patch delete].each do |http_method|
-    send(http_method, '*path', to: 'employee/spa#no_routing')
   end
 end

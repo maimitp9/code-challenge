@@ -27,4 +27,7 @@ module ErrorCode
   VALIDATION_OTHER_THAN =               '400_0023'
 
   VALIDATION_OTHERS =                   '400_9999'
+
+  NO_ROUTE_MATCH_OR_NOT_FOUND =         '404_0000'
+  UNEXPECTED_ERROR =                    '500_0000'
 end
