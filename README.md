@@ -24,7 +24,13 @@ These instructions will get you a copy of the project up and running on your loc
 
 A step by step series of examples that tell you how to get a development env running.
 
-- Unzip the included file and move to the `code-challenge` directory from your terminal
+- Clone this repository
+
+```
+https://github.com/maimitp9/code-challenge.git
+```
+
+- Move to the `code-challenge` directory from your terminal
 
 ```
 cd code-challenge
