@@ -1,8 +1,21 @@
-# PayPay Code Challenge
+# Code Challenge
+
+Design a web application that allows employees to submit feedback toward each other's performance review.
 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+## Introduction
+
+### Admin view
+* Add/remove/update/view employees
+* Add/update/view performance reviews
+* Assign employees to participate in another employee's performance review
+
+### Employee view
+* List of performance reviews requiring feedback
+* Submit feedback
 
 ### Prerequisites
 
